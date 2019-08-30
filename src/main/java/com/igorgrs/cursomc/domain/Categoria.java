@@ -36,4 +36,12 @@ public class Categoria implements Serializable {
 	@JoinTable(name = "categoria_produto", joinColumns = @JoinColumn(name = "categoria_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
 	List<Produto> produtos = new ArrayList<Produto>();
 
+	public Categoria(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+	
+	
+
 }

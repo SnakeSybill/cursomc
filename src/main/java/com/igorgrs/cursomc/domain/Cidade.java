@@ -1,26 +1,23 @@
 package com.igorgrs.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produto implements Serializable {
+@Entity
+public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,18 +25,8 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Double preco;
-
-	@ManyToMany(mappedBy = "produtos")
-	@JsonBackReference
-	List<Categoria> categorias = new ArrayList<Categoria>();
-
-	public Produto(Integer id, String nome, Double preco) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.preco = preco;
-	}
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "estado_cidade")
+	private Estado estado;
 }
