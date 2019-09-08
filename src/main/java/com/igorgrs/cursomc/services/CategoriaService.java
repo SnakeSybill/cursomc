@@ -13,15 +13,25 @@ import com.igorgrs.cursomc.repository.CategoriaRepository;
 public class CategoriaService {
 
 	@Autowired
-	private CategoriaRepository categoriaRepository;
-	
-	public Categoria buscar(Integer id) {
-		Optional<Categoria> categoria = categoriaRepository.findById(id);
-		
-		if(!categoria.isPresent()) {
-			throw new ObjectNotFoundException("Objeto não encontrado");
+	private CategoriaRepository objRepository;
+
+	public Categoria find(Integer id) {
+		Optional<Categoria> obj = objRepository.findById(id);
+
+		if (!obj.isPresent()) {
+			throw new ObjectNotFoundException("Object not found");
 		}
-			
-		return categoria.get();
+
+		return obj.get();
+	}
+
+	public Categoria insert(Categoria obj) {
+		obj.setId(null);
+		return objRepository.save(obj);
+	}
+	
+	public Categoria update(Categoria obj) {
+		find(obj.getId());
+		return objRepository.save(obj);
 	}
 }
