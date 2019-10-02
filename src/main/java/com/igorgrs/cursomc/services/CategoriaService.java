@@ -1,5 +1,6 @@
 package com.igorgrs.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,9 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException ex) {
 			throw new DataIntegrityException("This record has children, unable to delete it.");
 		}
+	}
+	
+	public List<Categoria> findAll() {
+		return objRepository.findAll();
 	}
 }
