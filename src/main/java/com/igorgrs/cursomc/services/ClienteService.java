@@ -38,8 +38,9 @@ public class ClienteService {
 	}
 
 	public Cliente update(Cliente obj) {
-		find(obj.getId());
-		return objRepository.save(obj);
+		Cliente newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return objRepository.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -62,5 +63,10 @@ public class ClienteService {
 	
 	public Cliente fromDto(ClienteDto dto) {
 		return new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), null, null);
+	}
+	
+	private void updateData(Cliente newObj, Cliente obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setEmail(obj.getEmail());
 	}
 }

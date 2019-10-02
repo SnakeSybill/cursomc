@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.igorgrs.cursomc.domain.Categoria;
@@ -14,7 +15,6 @@ import com.igorgrs.cursomc.dto.CategoriaDto;
 import com.igorgrs.cursomc.exceptions.DataIntegrityException;
 import com.igorgrs.cursomc.exceptions.ObjectNotFoundException;
 import com.igorgrs.cursomc.repository.CategoriaRepository;
-import org.springframework.data.domain.Sort.Direction;
 
 @Service
 public class CategoriaService {
@@ -38,8 +38,9 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId());
-		return objRepository.save(obj);
+		Categoria newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return objRepository.save(newObj);
 	}
 
 	public void delete(Integer id) {
@@ -62,5 +63,9 @@ public class CategoriaService {
 	
 	public Categoria fromDto(CategoriaDto dto) {
 		return new Categoria(dto.getId(), dto.getNome());
+	}
+	
+	private void updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
 	}
 }
