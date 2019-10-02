@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.igorgrs.cursomc.domain.Categoria;
+import com.igorgrs.cursomc.dto.CategoriaDto;
 import com.igorgrs.cursomc.exceptions.DataIntegrityException;
 import com.igorgrs.cursomc.exceptions.ObjectNotFoundException;
 import com.igorgrs.cursomc.repository.CategoriaRepository;
@@ -57,5 +58,9 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return objRepository.findAll(pageRequest);
+	}
+	
+	public Categoria fromDto(CategoriaDto dto) {
+		return new Categoria(dto.getId(), dto.getNome());
 	}
 }
