@@ -24,20 +24,26 @@ import com.igorgrs.cursomc.domain.Categoria;
 import com.igorgrs.cursomc.dto.CategoriaDto;
 import com.igorgrs.cursomc.services.CategoriaService;
 
-@RestController 
+@RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
 	@Autowired
 	private CategoriaService categoriaService;
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Categoria> find(@PathVariable(value = "id") Integer id) {
-		
-		Categoria categoria = categoriaService.find(id);
-		return ResponseEntity.ok().body(categoria);
+	public ResponseEntity<CategoriaDto> find(@PathVariable(value = "id") Integer id) {
+		CategoriaDto categoriaDto = new CategoriaDto(categoriaService.find(id).getNome());
+		return ResponseEntity.ok().body(categoriaDto);
 	}
-	
+
+	@GetMapping
+	public ResponseEntity<List<CategoriaDto>> findAll() {
+		List<CategoriaDto> categoriaDto = categoriaService.findAll().stream()
+				.map(obj -> new CategoriaDto(obj.getNome())).collect(Collectors.toList());
+		return ResponseEntity.ok().body(categoriaDto);
+	}
+
 	@PostMapping()
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDto categoriaDto) {
 		Categoria categoria = categoriaService.insert(categoriaService.fromDto(categoriaDto));
@@ -45,7 +51,7 @@ public class CategoriaResource {
 				.buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDto categoriaDto, @PathVariable Integer id) {
 		Categoria categoria = categoriaService.fromDto(categoriaDto);
@@ -53,10 +59,10 @@ public class CategoriaResource {
 		categoria = categoriaService.update(categoria);
 		return ResponseEntity.noContent().build();
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable(value = "id") Integer id) {
-		
+
 		categoriaService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
