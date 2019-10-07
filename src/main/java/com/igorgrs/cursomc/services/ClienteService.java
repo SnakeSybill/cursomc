@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.igorgrs.cursomc.domain.Cidade;
 import com.igorgrs.cursomc.domain.Cliente;
 import com.igorgrs.cursomc.domain.Endereco;
+import com.igorgrs.cursomc.domain.enums.TipoCliente;
 import com.igorgrs.cursomc.dto.ClienteDto;
 import com.igorgrs.cursomc.dto.ClienteNewDto;
 import com.igorgrs.cursomc.exceptions.DataIntegrityException;
@@ -86,7 +87,7 @@ public class ClienteService {
 		if (dto.getTelefone3() != null)
 			telefones.add(dto.getTelefone3());
 
-		Cliente cliente = new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), null, null);
+		Cliente cliente = new Cliente(dto.getId(), dto.getNome(), dto.getEmail(), dto.getCpfOuCnpj(), TipoCliente.toEnum(dto.getTipo()));
 		cliente.setTelefones(telefones);
 		Endereco end = new Endereco(null, dto.getLogradouro(), dto.getNumero(), dto.getComplemento(), dto.getBairro(),
 				dto.getCep(), cliente, new Cidade(dto.getCidadeId(), null, null));

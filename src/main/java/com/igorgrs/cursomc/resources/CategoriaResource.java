@@ -33,14 +33,7 @@ public class CategoriaResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<CategoriaDto> find(@PathVariable(value = "id") Integer id) {
-		CategoriaDto categoriaDto = new CategoriaDto(categoriaService.find(id).getNome());
-		return ResponseEntity.ok().body(categoriaDto);
-	}
-
-	@GetMapping
-	public ResponseEntity<List<CategoriaDto>> findAll() {
-		List<CategoriaDto> categoriaDto = categoriaService.findAll().stream()
-				.map(obj -> new CategoriaDto(obj.getNome())).collect(Collectors.toList());
+		CategoriaDto categoriaDto = new CategoriaDto(categoriaService.find(id));
 		return ResponseEntity.ok().body(categoriaDto);
 	}
 

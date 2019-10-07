@@ -32,10 +32,6 @@ public class CategoriaService {
 		return obj.get();
 	}
 
-	public List<Categoria> findAll() {
-		return objRepository.findAll();
-	}
-
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return objRepository.save(obj);
