@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.igorgrs.cursomc.domain.Cliente;
+import com.igorgrs.cursomc.services.validation.ClienteUpdate;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@ClienteUpdate
 public class ClienteDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
