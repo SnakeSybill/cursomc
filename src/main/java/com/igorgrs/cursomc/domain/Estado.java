@@ -1,6 +1,7 @@
 package com.igorgrs.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @AllArgsConstructor
@@ -32,5 +34,6 @@ public class Estado implements Serializable {
 	
 	@OneToMany(mappedBy = "estado")
 	@JsonIgnore
-	private List<Cidade> cidades;
+	@NonNull
+	private List<Cidade> cidades = Arrays.asList();
 }

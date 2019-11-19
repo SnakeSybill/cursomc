@@ -105,6 +105,12 @@ public class Pedido implements Serializable{
 		return serialVersionUID;
 	}
 	
-	
+	public double getValorPedido() {
+		double soma = 0;
+		for(ItemPedido item : itens) {
+			soma += item.getSubTotal();
+		}
+		return soma;
+	}
 
 }
