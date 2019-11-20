@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +16,7 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;

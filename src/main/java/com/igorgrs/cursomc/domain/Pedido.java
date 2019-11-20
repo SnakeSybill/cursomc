@@ -1,9 +1,9 @@
 package com.igorgrs.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -43,7 +43,7 @@ public class Pedido implements Serializable{
 	private Endereco enderecoDeEntrega;
 	
 	@OneToMany(mappedBy = "id.pedido")
-	private Set<ItemPedido> itens = new HashSet<>();
+	private List<ItemPedido> itens = Arrays.asList();
 
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
@@ -93,11 +93,11 @@ public class Pedido implements Serializable{
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
 
-	public Set<ItemPedido> getItens() {
+	public List<ItemPedido> getItens() {
 		return itens;
 	}
 
-	public void setItens(Set<ItemPedido> itens) {
+	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
 	}
 

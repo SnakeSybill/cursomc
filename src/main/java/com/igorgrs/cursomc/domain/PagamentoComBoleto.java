@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.Setter;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
