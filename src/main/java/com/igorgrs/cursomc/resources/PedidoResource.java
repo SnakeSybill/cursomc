@@ -2,8 +2,6 @@ package com.igorgrs.cursomc.resources;
 
 import java.net.URI;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +30,7 @@ public class PedidoResource {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) {
+	public ResponseEntity<Void> insert(@RequestBody Pedido pedido) {
 		Pedido pedidoInserido = pedidoService.insertPedidoObj(pedido);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(pedidoInserido.getId()).toUri();

@@ -19,7 +19,6 @@ public class ItemPedidoPK implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
-	@JsonIgnore
 	private Produto produto;
 	
 	@ManyToOne

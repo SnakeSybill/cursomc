@@ -1,5 +1,6 @@
 package com.igorgrs.cursomc;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.igorgrs.cursomc.domain.Categoria;
 import com.igorgrs.cursomc.domain.Cidade;
 import com.igorgrs.cursomc.domain.Cliente;
@@ -166,6 +168,22 @@ public class CursomcApplication implements CommandLineRunner {
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
 		
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		
+		ObjectMapper Obj = new ObjectMapper(); 
+		  
+        try { 
+  
+            // get Oraganisation object as a json string 
+            String jsonStr = Obj.writeValueAsString(ped1); 
+  
+            // Displaying JSON String 
+            System.out.println(jsonStr); 
+        } 
+  
+        catch (IOException e) { 
+            e.printStackTrace(); 
+        } 
+        
 		ped2.getItens().addAll(Arrays.asList(ip3));
 		
 		p1.getItens().addAll(Arrays.asList(ip1));

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.igorgrs.cursomc.domain.ItemPedido;
 import com.igorgrs.cursomc.domain.PagamentoComBoleto;
@@ -46,8 +47,9 @@ public class PedidoService {
 		return pedido.get();
 	}
 	
+	 @Transactional
 	public Pedido insertPedidoObj(Pedido obj) {
-		//obj.setId(null);
+		obj.setId(null);
 		obj.setInstante(new Date());
 		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE.getCodigo());
